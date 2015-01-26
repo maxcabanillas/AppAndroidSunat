@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="solodescuentos.com.app.DisplayTiendasActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/nombre_label"
+        android:text="@string/nombre_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/nombre_content_label"
+        android:text="@string/nombre_content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/nombre_label"
+        android:layout_alignLeft="@+id/destino_content_value"
+        android:layout_alignStart="@+id/destino_content_value" />
+
+    <TextView
+        android:id="@+id/fecha_value"
+        android:text="@string/fecha_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/nombre_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/fecha_content_value"
+        android:text="@string/fecha_content_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/fecha_value"
+        android:layout_alignLeft="@+id/nombre_content_label"
+        android:layout_alignStart="@+id/nombre_content_label" />
+
+    <TextView
+        android:id="@+id/ubicacion_value"
+        android:text="@string/ubicacion_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/fecha_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/ubicacion_content_value"
+        android:text="@string/ubicacion_content_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignTop="@+id/ubicacion_value"
+        android:layout_alignLeft="@+id/fecha_content_value"
+        android:layout_alignStart="@+id/fecha_content_value" />
+
+
+    <TextView
+        android:id="@+id/destino_value"
+        android:text="@string/destino_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/ubicacion_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/destino_content_value"
+        android:text="@string/destino_content_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginRight="98dp"
+        android:layout_marginEnd="98dp"
+        android:layout_alignTop="@+id/destino_value"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+</RelativeLayout>
