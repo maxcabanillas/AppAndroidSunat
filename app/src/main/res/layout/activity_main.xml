@@ -14,4 +14,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="openTiendaActivity"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista"
+        android:id="@+id/buttonLista"
+        android:onClick="openListActivity"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vogella"
+        android:id="@+id/buttonVogelle"
+        android:onClick="openListVogella"
+        android:layout_alignTop="@+id/buttonLista"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

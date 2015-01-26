@@ -12,6 +12,16 @@ public class Greeting {
     private String _id;
     private String descripcion;
 
+    public Greeting(String n, String f) {
+        this.setNombre(n);
+        this.setFecha(f);
+
+    }
+    public Greeting() {
+       super();
+
+    }
+
 
     public String getNombre() {
         return nombre;

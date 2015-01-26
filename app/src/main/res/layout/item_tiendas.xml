@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+        <LinearLayout
+            android:layout_width="500px"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <LinearLayout
+                android:layout_width="500px"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+        <TextView
+                android:id="@+id/nombre_label"
+                android:text="@string/nombre_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <TextView
+                android:id="@+id/nombre_content_label"
+                android:text="@string/nombre_content_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="500px"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+        <TextView
+            android:id="@+id/fecha_value"
+            android:text="@string/fecha_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/nombre_label"
+
+
+            />
+
+        <TextView
+            android:id="@+id/fecha_content_value"
+            android:text="@string/fecha_content_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fecha_value"
+            />
+                </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right">
+
+            <ImageView
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:id="@+id/imageView"
+                android:src="@drawable/ic_launcher"
+                />
+
+            </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

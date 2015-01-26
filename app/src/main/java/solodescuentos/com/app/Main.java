@@ -22,6 +22,18 @@ public class Main extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void openListActivity (View view){
+
+        Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
+    public void openListVogella (View view){
+
+        Intent intent = new Intent(this, VogellaActivityMainManagingFragments.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
