@@ -51,7 +51,7 @@ public class ListActivity extends ActionBarActivity {
 // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.lvItems);
         listView.setAdapter(adapter);
-
+/*
         Greeting newUser = new Greeting("Moro", "Mora");
         adapter.add(newUser);
         Greeting newUser2 = new Greeting("Jes", "Lamora");
@@ -64,7 +64,7 @@ public class ListActivity extends ActionBarActivity {
         adapter.add(newUser5);
         Greeting newUser6 = new Greeting("xD", "-.-");
         adapter.add(newUser6);
-
+    */
     }
     //adapter
 

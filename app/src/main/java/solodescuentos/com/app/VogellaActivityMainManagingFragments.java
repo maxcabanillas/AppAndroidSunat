@@ -1,23 +1,27 @@
 package solodescuentos.com.app;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
-
-public class VogellaActivityMainManagingFragments extends FragmentActivity {
+public class VogellaActivityMainManagingFragments extends FragmentActivity implements BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vogella_activity_main_managing_fragments);
-        // Check whether the activity is using the layout version with
-        // the fragment_container FrameLayout. If so, we must add the first fragment
-        if (findViewById(R.id.fragment_container) != null) {
+
+        // Check that the activity is using the layout version with
+        // the fragment_container FrameLayout
+        if (findViewById(R.id.fragment_container2) != null) {
 
             // However, if we're being restored from a previous state,
             // then we don't need to do anything and should return or else
@@ -26,18 +30,65 @@ public class VogellaActivityMainManagingFragments extends FragmentActivity {
                 return;
             }
 
-            // Create an instance of ExampleFragment
-            BlankFragment firstFragment = new BlankFragment();
+            // Create a new Fragment to be placed in the activity layout
+            BlankFragment2 firstFragment = new BlankFragment2();
 
-            // In case this activity was started with special instructions from an Intent,
-            // pass the Intent's extras to the fragment as arguments
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
             firstFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            int commit = getFragmentManager ().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container2, firstFragment).commit();
+
         }
+
     }
+/*
+
+
+
+*/
+    BlankFragment newFragment = new BlankFragment();
+
+    public void mostrarFragmento(View view) {
+        // Create fragment and give it an argument specifying the article it should show
+
+        Bundle args = new Bundle();
+
+
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+
+// Commit the transaction
+        transaction.commit();
+
+
+    }
+
+    public void ocultarFragmento(View view) {
+        // Create fragment and give it an argument specifying the article it should show
+
+        Bundle args = new Bundle();
+
+
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack so the user can navigate back
+        transaction.remove(newFragment);
+
+
+// Commit the transaction
+        transaction.commit();
+    }
+
 
 
     @Override
@@ -60,5 +111,10 @@ public class VogellaActivityMainManagingFragments extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

@@ -11,11 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -26,6 +25,7 @@ public class DisplayTiendasActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_display_tiendas);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -43,6 +43,8 @@ public class DisplayTiendasActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         new HttpRequestTask().execute();
+
+
     }
 
     @Override
