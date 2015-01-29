@@ -15,6 +15,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -34,16 +40,7 @@ public class ListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        /*
-        items = new String[] { "Vegetables","Fruits","Flower Buds","Legumes","Bulbs","Tubers","Fruits","Flower Buds","Legumes","Bulbs","Tubers","Fruits","Flower Buds","Legumes","Bulbs","Tubers","Fruits","Flower Buds","Legumes","Bulbs","Tubers","Fruits","Flower Buds","Legumes","Bulbs","Tubers" };
-
-       ArrayAdapter<String> itemsAdapter =
-       new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-
-        ListView listView = (ListView) findViewById(R.id.lvItems);
-        listView.setAdapter(itemsAdapter);
-//http://www.learn2crack.com/2014/06/android-load-image-from-internet.html
-*/      img = (ImageView)findViewById(R.id.img);
+     img = (ImageView)findViewById(R.id.img);
         new LoadImage().execute("http://www.adslzone.net/app/uploads/2014/08/apertura-selfie-mono.jpg");
         ArrayList<Greeting> arrayOfUsers = new ArrayList<>();
 // Create the adapter to convert the array to views
@@ -51,20 +48,44 @@ public class ListActivity extends ActionBarActivity {
 // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.lvItems);
         listView.setAdapter(adapter);
+
+
+
+        JSONArray ja = new JSONArray();
+        try {
+
+            JSONObject jo = new JSONObject();
+            jo.put("nombre", "John");
+            jo.put("fecha", "Doe");
+            JSONObject ju = new JSONObject();
+            ju.put("nombre", "Manuel");
+            ju.put("fecha", "Zavaleta");
+            ja.put(jo);ja.put(ju);
+
+            Log.e("xD","here");
+
+
 /*
-        Greeting newUser = new Greeting("Moro", "Mora");
-        adapter.add(newUser);
-        Greeting newUser2 = new Greeting("Jes", "Lamora");
-        adapter.add(newUser2);
-        Greeting newUser3 = new Greeting("Manuel", "Zavaleta");
-        adapter.add(newUser3);
-        Greeting newUser4 = new Greeting("Dota2", "Lo max");
-        adapter.add(newUser4);
-        Greeting newUser5 = new Greeting("Sunat", "Aburre");
-        adapter.add(newUser5);
-        Greeting newUser6 = new Greeting("xD", "-.-");
-        adapter.add(newUser6);
-    */
+
+            final String url = "http://restsunat.herokuapp.com/notificaciones/54b313d5e4b0aa674b25944c";
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            Greeting greeting = restTemplate.getForObject(url, Greeting.class);
+*/
+
+
+        }catch (Exception e){
+
+        }
+
+
+
+
+
+        JSONArray jsonArray = ja;
+        ArrayList<Greeting> newUsers = Greeting.fromJson(jsonArray);
+        adapter.addAll(newUsers);
+
     }
     //adapter
 
@@ -97,6 +118,7 @@ public class ListActivity extends ActionBarActivity {
     }
 
     //adapter /
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

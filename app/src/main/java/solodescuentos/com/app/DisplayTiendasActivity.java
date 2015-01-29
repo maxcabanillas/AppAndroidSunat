@@ -79,6 +79,8 @@ public class DisplayTiendasActivity extends ActionBarActivity {
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Greeting greeting = restTemplate.getForObject(url, Greeting.class);
+                Log.e("verbo",greeting.getUbicacion());
+
                 return greeting;
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);

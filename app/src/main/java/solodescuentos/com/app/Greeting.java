@@ -1,5 +1,11 @@
 package solodescuentos.com.app;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by IIIII on 1/24/2015.
  */
@@ -11,16 +17,42 @@ public class Greeting {
     private String destino;
     private String _id;
     private String descripcion;
-/*
+
     public Greeting(String n, String f) {
         this.setNombre(n);
         this.setFecha(f);
 
     }
 
-    */
+    public Greeting() {
+        super();
+    }
 
 
+
+
+
+    public static ArrayList<Greeting> fromJson(JSONArray jsonObjects) {
+        ArrayList<Greeting> users = new ArrayList<Greeting>();
+        for (int i = 0; i < jsonObjects.length(); i++) {
+            try {
+                users.add(new Greeting(jsonObjects.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return users;
+    }
+
+    public Greeting(JSONObject object) {
+        try {
+            this.nombre = object.getString("nombre");
+            this.fecha = object.getString("fecha");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public String getNombre() {
         return nombre;
