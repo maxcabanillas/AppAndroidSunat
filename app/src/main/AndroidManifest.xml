@@ -32,12 +32,12 @@
             android:label="@string/title_activity_list" >
         </activity>
         <activity
-            android:name=".VogellaActivityMainManagingFragments"
-            android:label="@string/title_activity_vogella_activity_main_managing_fragments" >
-        </activity>
-        <activity
             android:name=".AddToList"
             android:label="@string/title_activity_add_to_list" >
+        </activity>
+        <activity
+            android:name=".ItemDetalle"
+            android:label="@string/title_activity_item_detalle" >
         </activity>
     </application>
 

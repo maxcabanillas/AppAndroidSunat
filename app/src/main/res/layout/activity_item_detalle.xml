@@ -13,7 +13,7 @@
 
         android:layout_gravity="center_horizontal"
         android:background="@android:color/holo_green_light"
-       >
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
 
         </LinearLayout>
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 
@@ -60,31 +60,31 @@
 
 
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/fecha_value"
+                    android:text="@string/fecha_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30px"
-                    android:orientation="horizontal">
-        <TextView
-            android:id="@+id/fecha_value"
-            android:text="@string/fecha_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/nombre_label"
-            android:textColor="#25383C"
+                    android:layout_alignTop="@+id/nombre_label"
+                    android:textColor="#25383C"
 
 
-            />
+                    />
 
-        <TextView
-            android:id="@+id/fecha_content_value"
-            android:text="@string/fecha_content_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/fecha_value"
-            android:textColor="#25383C"
-            />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/fecha_content_value"
+                    android:text="@string/fecha_content_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/fecha_value"
+                    android:textColor="#25383C"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
         <LinearLayout
@@ -101,7 +101,7 @@
                 android:src="@drawable/ic_launcher"
                 />
 
-            </LinearLayout>
+        </LinearLayout>
 
 
 
@@ -126,7 +126,7 @@
         <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           />
+            />
 
         <LinearLayout
             android:orientation="horizontal"

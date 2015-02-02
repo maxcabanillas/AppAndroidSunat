@@ -47,6 +47,7 @@ public class Greeting {
 
     public Greeting(JSONObject object) {
         try {
+            this._id = object.getString("_id");
             this.nombre = object.getString("nombre");
             this.fecha = object.getString("fecha");
             this.descripcion = object.getString("descripcion");

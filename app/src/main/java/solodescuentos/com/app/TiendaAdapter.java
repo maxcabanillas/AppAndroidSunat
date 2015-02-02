@@ -1,6 +1,7 @@
 package solodescuentos.com.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +37,7 @@ public class TiendaAdapter extends ArrayAdapter<Greeting> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Greeting item = getItem(position);
+        final Greeting item = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_tiendas, parent, false);
@@ -48,7 +50,21 @@ public class TiendaAdapter extends ArrayAdapter<Greeting> {
         TextView tvHome = (TextView) convertView.findViewById(R.id.fecha_content_value);
 
         ImageView imgView = (ImageView) convertView.findViewById(R.id.imageView);
+       Button btn = (Button) convertView.findViewById(R.id.buttonDelete);
+        btn.setText(item.get_id());
 
+
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ItemDetalle.class);
+                intent.putExtra("EXTRA_SESSION_ID", item.getDescripcion());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+               // startActivity(intent);
+                getContext().startActivity(intent);
+                Toast.makeText(getContext(), "id"+item.get_id(), Toast.LENGTH_LONG).show();
+            }
+        });
         // Populate the data into the template view using the data object
         tvName.setText(item.getNombre());
         tvHome.setText(item.getFecha());
@@ -58,11 +74,6 @@ public class TiendaAdapter extends ArrayAdapter<Greeting> {
         }else{
             Picasso.with(getContext()).load(item.getDescripcion()).into(imgView);
         }
-
-        //Bitmap bitmap = getBitmapFromURL("http://www.pequeocio.com/wp-content/uploads/2009/05/jorge-el-monito.jpg");
-        //   imgView.setImageBitmap(bitmap);
-
-
 
 
 

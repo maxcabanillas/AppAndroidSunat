@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Application;
+
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 public class AddToList extends ActionBarActivity {
-    static AddToList app;
+    //static AddToList app;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,19 +27,6 @@ public class AddToList extends ActionBarActivity {
         //app = ((AddToList)getApplicationContext());
 
 
-    }
-public void Message (View view){
-    Toast.makeText(getApplicationContext(),"Su Registro ha sido grabado, Puede verificarlo cargando la Lista Nuevamente",Toast.LENGTH_LONG).show();
-}
-    public void GrabarPostExcecute (View view){
-        TextView txtNombre = (TextView) findViewById(R.id.textViewNombre);
-        TextView txtUbicacion = (TextView) findViewById(R.id.textViewUbicacion);
-        TextView txtDestino = (TextView) findViewById(R.id.textViewDestino);
-        TextView txtFecha = (TextView) findViewById(R.id.textViewFecha);
-        TextView txtDescripcion = (TextView) findViewById(R.id.textViewDescripcion);
-      //  new HttpRequestTask3().execute("Manuel","Zavaleta","Vargas","Destino","https://media.licdn.com/mpr/mpr/shrink_120_120/p/6/005/092/16e/3038a67.jpg");
-        Message(view);
-        new HttpRequestTask3().execute(txtNombre.getText().toString(),txtFecha.getText().toString(),txtUbicacion.getText().toString(),txtDestino.getText().toString(),txtDescripcion.getText().toString());
     }
 
     @Override
@@ -63,6 +50,24 @@ public void Message (View view){
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void Message (View view){
+        Toast.makeText(getApplicationContext(),"Su Registro ha sido grabado, Puede verificarlo cargando la Lista Nuevamente",Toast.LENGTH_LONG).show();
+    }
+    public void GrabarPostExcecute (View view){
+        TextView txtNombre = (TextView) findViewById(R.id.textViewNombre);
+        TextView txtUbicacion = (TextView) findViewById(R.id.textViewUbicacion);
+        TextView txtDestino = (TextView) findViewById(R.id.textViewDestino);
+        TextView txtFecha = (TextView) findViewById(R.id.textViewFecha);
+        TextView txtDescripcion = (TextView) findViewById(R.id.textViewDescripcion);
+        //  new HttpRequestTask3().execute("Manuel","Zavaleta","Vargas","Destino","https://media.licdn.com/mpr/mpr/shrink_120_120/p/6/005/092/16e/3038a67.jpg");
+        Message(view);
+        new HttpRequestTask3().execute(txtNombre.getText().toString(),txtFecha.getText().toString(),txtUbicacion.getText().toString(),txtDestino.getText().toString(),txtDescripcion.getText().toString());
+    }
+
+
+
     private class HttpRequestTask3 extends AsyncTask<String, Integer, Integer> {
         @Override
         protected Integer doInBackground(String... args ) {

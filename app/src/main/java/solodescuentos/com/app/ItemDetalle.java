@@ -1,41 +1,34 @@
 package solodescuentos.com.app;
 
-
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 
 
-public class ListActivity extends ActionBarActivity {
-
+public class ItemDetalle extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
-        new HttpRequestTask().execute();
-
+        setContentView(R.layout.activity_item_detalle);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_list, menu);
+        getMenuInflater().inflate(R.menu.item_tienda_detalle, menu);
         return true;
     }
 
@@ -48,27 +41,19 @@ public class ListActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            new HttpRequestTask().execute();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /*public void Eliminar(View view){
-        Button btn = (Button) findViewById(R.id.buttonDelete);
-       String txttemp = btn.getText().toString();
-        new HttpRequestTask2().execute(txttemp);
-        Toast.makeText(getApplicationContext(), "Su Registro ha sido grabado, Puede verificarlo cargando la Lista Nuevamente", Toast.LENGTH_LONG).show();
-    }
-*/
     private class HttpRequestTask extends AsyncTask<Void, Void, Greeting[]> {
 
 
         @Override
         protected Greeting[] doInBackground(Void... params) {
             try {
-                final String url = "http://restsunat.herokuapp.com/notificaciones";
+                final String url = "http://restsunat.herokuapp.com/notificaciones/"+params[0];
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Greeting[] greeting = restTemplate.getForObject(url, Greeting[].class);
@@ -125,31 +110,4 @@ public class ListActivity extends ActionBarActivity {
         }
 
     }
-   private class HttpRequestTask2 extends AsyncTask<String, Integer, Integer> {
-        @Override
-        protected Integer doInBackground(String... args ) {
-            try {
-                final String url = "http://restsunat.herokuapp.com/notificaciones/"+args[0];
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                restTemplate.delete(url);
-                // URL u = new URL();
-                return null;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
-            }
-            return null;
-
-
-
-
-        }
-
-
-
-    }
-
-
-
-
 }

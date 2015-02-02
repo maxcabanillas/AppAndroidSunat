@@ -30,11 +30,6 @@ public class Main extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void openListVogella (View view){
-
-        Intent intent = new Intent(this, VogellaActivityMainManagingFragments.class);
-        startActivity(intent);
-    }
 
     public void openAddToList (View view){
 
