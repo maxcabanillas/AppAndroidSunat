@@ -36,6 +36,12 @@ public class Main extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void openAddToList (View view){
+
+        Intent intent = new Intent(this, AddToList.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -15,9 +15,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -26,98 +33,111 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
 
 public class ListActivity extends ActionBarActivity {
-    String[] items;
-    ImageView img;
-    Bitmap bitmap;
-    ProgressDialog pDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-     img = (ImageView)findViewById(R.id.img);
-        new LoadImage().execute("http://www.adslzone.net/app/uploads/2014/08/apertura-selfie-mono.jpg");
-        ArrayList<Greeting> arrayOfUsers = new ArrayList<>();
-// Create the adapter to convert the array to views
-        TiendaAdapter adapter = new TiendaAdapter(this, arrayOfUsers);
-// Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.lvItems);
-        listView.setAdapter(adapter);
-
-
-
-        JSONArray ja = new JSONArray();
-        try {
-
-            JSONObject jo = new JSONObject();
-            jo.put("nombre", "John");
-            jo.put("fecha", "Doe");
-            JSONObject ju = new JSONObject();
-            ju.put("nombre", "Manuel");
-            ju.put("fecha", "Zavaleta");
-            ja.put(jo);ja.put(ju);
-
-            Log.e("xD","here");
-
-
-/*
-
-            final String url = "http://restsunat.herokuapp.com/notificaciones/54b313d5e4b0aa674b25944c";
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            Greeting greeting = restTemplate.getForObject(url, Greeting.class);
-*/
-
-
-        }catch (Exception e){
-
-        }
-
-
-
-
-
-        JSONArray jsonArray = ja;
-        ArrayList<Greeting> newUsers = Greeting.fromJson(jsonArray);
-        adapter.addAll(newUsers);
+        new HttpRequestTask().execute();
 
     }
-    //adapter
 
-    public class LoadImage extends AsyncTask<String, String, Bitmap> {
+    private class HttpRequestTask extends AsyncTask<Void, Void, Greeting[]> {
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(ListActivity.this);
-            pDialog.setMessage("Loading Image ....");
-            pDialog.show();
-        }
-        protected Bitmap doInBackground(String... args) {
-
+        protected Greeting[] doInBackground(Void... params) {
             try {
-                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+                final String url = "http://restsunat.herokuapp.com/notificaciones";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Greeting[] greeting = restTemplate.getForObject(url, Greeting[].class);
+
+
+                return greeting;
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e("MainActivity", e.getMessage(), e);
             }
-            return bitmap;
+            return null;
         }
-        protected void onPostExecute(Bitmap image) {
-            if(image != null){
-                img.setImageBitmap(image);
-                pDialog.dismiss();
-            }else{
-                pDialog.dismiss();
-                Toast.makeText(ListActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+
+        @Override
+        protected void onPostExecute(Greeting[] greeting) {
+            ArrayList<Greeting> arrayOfUsers = new ArrayList<>();
+// Create the adapter to convert the array to views
+            TiendaAdapter adapter = new TiendaAdapter(getApplicationContext(), arrayOfUsers);
+            // Attach the adapter to a ListView
+            ListView listView = (ListView) findViewById(R.id.lvItems);
+            listView.setAdapter(adapter);
+
+
+            JSONArray ja = new JSONArray();
+
+
+            for (int i=0;i<greeting.length;i++){
+                Log.e("For",""+i);
+
+                try {
+
+                    JSONObject jo = new JSONObject();
+                    jo.put("nombre", greeting[i].getNombre());
+                    jo.put("fecha", greeting[i].getFecha());
+                    jo.put("descripcion",greeting[i].getDescripcion());
+                    Log.e("verbo",greeting[i].getDescripcion());
+                    //  new LoadImage().execute(greeting[i].getDescripcion());
+                    ja.put(jo);
+
+
+
+                }catch (Exception e){
+                    Log.e("Error: ",e.getMessage());
+                }
+
             }
+
+
+            JSONArray jsonArray = ja;
+            ArrayList<Greeting> newUsers = Greeting.fromJson(jsonArray);
+            adapter.addAll(newUsers);
+
         }
+
     }
 
-    //adapter /
+    private class HttpRequestTask2 extends AsyncTask<String, Integer, Integer> {
+        @Override
+        protected Integer doInBackground(String... args ) {
+            try {
+                final String url = "http://restsunat.herokuapp.com/notificaciones/"+args[0];
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                restTemplate.delete(url);
+               // URL u = new URL();
+                return null;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+            return null;
+
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
 
 
     @Override
@@ -136,6 +156,7 @@ public class ListActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new HttpRequestTask().execute();
             return true;
         }
 

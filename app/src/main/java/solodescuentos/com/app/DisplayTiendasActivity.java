@@ -63,7 +63,7 @@ public class DisplayTiendasActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            new HttpRequestTask().execute();
+         //   new HttpRequestTask().execute();
             return true;
         }
 
@@ -71,15 +71,15 @@ public class DisplayTiendasActivity extends ActionBarActivity {
     }
 
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Greeting> {
+    private class HttpRequestTask extends AsyncTask<Void, Void, Greeting[]> {
         @Override
-        protected Greeting doInBackground(Void... params) {
+        protected Greeting[] doInBackground(Void... params) {
             try {
-                final String url = "http://restsunat.herokuapp.com/notificaciones/54b313d5e4b0aa674b25944c";
+                final String url = "http://restsunat.herokuapp.com/notificaciones";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Greeting greeting = restTemplate.getForObject(url, Greeting.class);
-                Log.e("verbo",greeting.getUbicacion());
+                Greeting[] greeting = restTemplate.getForObject(url, Greeting[].class);
+                Log.e("verbo",greeting[0].getUbicacion());
 
                 return greeting;
             } catch (Exception e) {
@@ -89,17 +89,16 @@ public class DisplayTiendasActivity extends ActionBarActivity {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(Greeting greeting) {
-            TextView greetingNombre = (TextView) findViewById(R.id.nombre_content_label);
-            TextView greetingFecha = (TextView) findViewById(R.id.fecha_content_value);
-            TextView greetingUbicacion = (TextView) findViewById(R.id.ubicacion_content_value);
-            TextView greetingDestino = (TextView) findViewById(R.id.destino_content_value);
 
-            greetingNombre.setText(greeting.getNombre());
-            greetingFecha.setText(greeting.getFecha());
-            greetingUbicacion.setText(greeting.getUbicacion());
-            greetingDestino.setText(greeting.getDestino());
+
+        @Override
+        protected void onPostExecute(Greeting[] greeting) {
+
+            Log.e("MainActivity", "post");
+            for (int i=0;i<greeting.length;i++){
+            Log.e("For",""+i);
+
+            }
 
         }
 

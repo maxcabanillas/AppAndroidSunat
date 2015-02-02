@@ -16,6 +16,7 @@ public class Greeting {
     private String ubicacion;
     private String destino;
     private String _id;
+    private String __v;
     private String descripcion;
 
     public Greeting(String n, String f) {
@@ -48,6 +49,7 @@ public class Greeting {
         try {
             this.nombre = object.getString("nombre");
             this.fecha = object.getString("fecha");
+            this.descripcion = object.getString("descripcion");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -100,5 +102,13 @@ public class Greeting {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String get__v() {
+        return __v;
+    }
+
+    public void set__v(String __v) {
+        this.__v = __v;
     }
 }

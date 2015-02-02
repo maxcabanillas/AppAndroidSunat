@@ -35,6 +35,10 @@
             android:name=".VogellaActivityMainManagingFragments"
             android:label="@string/title_activity_vogella_activity_main_managing_fragments" >
         </activity>
+        <activity
+            android:name=".AddToList"
+            android:label="@string/title_activity_add_to_list" >
+        </activity>
     </application>
 
 </manifest>
