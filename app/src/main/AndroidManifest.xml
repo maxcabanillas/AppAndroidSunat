@@ -2,14 +2,39 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="solodescuentos.com.app" >
 
+
+
+    <permission
+        android:name="your.package.name.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="solodescuentos.com.app.MAPS_RECEIVE"/>
+
+
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBaEyhWMaBkH3bp9HJ482qqLuek1nkVWm4" />
+
+
         <activity
             android:name=".Main"
             android:label="@string/app_name" >
@@ -18,14 +43,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".DisplayTiendasActivity"
-            android:label="@string/title_activity_display_tiendas"
-            android:parentActivityName=".Main" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="solodescuentos.com.app.Main" />
         </activity>
         <activity
             android:name=".ListActivity"
@@ -38,6 +55,10 @@
         <activity
             android:name=".ItemDetalle"
             android:label="@string/title_activity_item_detalle" >
+        </activity>
+        <activity
+            android:name=".maps"
+            android:label="@string/title_activity_maps" >
         </activity>
     </application>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-
+    android:background="@android:color/white"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:weightSum="1">
@@ -47,7 +47,8 @@
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.30">
 
 
 
@@ -86,31 +87,101 @@
                     />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ubicacion_value"
+                    android:text="@string/ubicacion_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/nombre_label"
+                    android:textColor="#25383C"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/ubicacion_content_value"
+                    android:text="@string/ubicacion_content_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/fecha_value"
+                    android:textColor="#25383C"
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/destino_value"
+                    android:text="@string/destino_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/nombre_label"
+                    android:textColor="#25383C"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/destino_content_value"
+                    android:text="@string/destino_content_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/fecha_value"
+                    android:textColor="#25383C"
+                    />
+            </LinearLayout>
+
+
+
+
+
+
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            >
 
-            <ImageView
-                android:layout_width="200px"
-                android:layout_height="200px"
 
-                android:id="@+id/imageView"
-                android:src="@drawable/ic_launcher"
-                />
 
-        </LinearLayout>
+
 
 
 
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="50px"
+        android:background="@android:color/white"
+
+        >
+
+        <ImageView
+            android:layout_width="500px"
+            android:layout_height="500px"
+
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_launcher"
+            />
+
+    </LinearLayout>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="100px"
         android:background="@android:color/darker_gray"/>
 
 
@@ -118,6 +189,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_gravity="center_horizontal"
         android:background="@android:color/white"
         >
@@ -142,7 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Delete"
-            android:onClick="Eliminar"
+            android:onClick="deleteItem"
             android:id="@+id/buttonDelete" />
     </LinearLayout>
 

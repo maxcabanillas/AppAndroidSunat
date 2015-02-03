@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,6 +39,17 @@ public class ListActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        new HttpRequestTask().execute();
+        Log.e("Resume","Resumig");
+
+    }
+
+
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -55,13 +65,7 @@ public class ListActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*public void Eliminar(View view){
-        Button btn = (Button) findViewById(R.id.buttonDelete);
-       String txttemp = btn.getText().toString();
-        new HttpRequestTask2().execute(txttemp);
-        Toast.makeText(getApplicationContext(), "Su Registro ha sido grabado, Puede verificarlo cargando la Lista Nuevamente", Toast.LENGTH_LONG).show();
-    }
-*/
+
     private class HttpRequestTask extends AsyncTask<Void, Void, Greeting[]> {
 
 
@@ -95,7 +99,7 @@ public class ListActivity extends ActionBarActivity {
 
 
             for (int i=0;i<greeting.length;i++){
-                Log.e("For",""+i);
+                Log.e("For",""+(i+1));
 
                 try {
 
@@ -103,8 +107,10 @@ public class ListActivity extends ActionBarActivity {
                     jo.put("_id", greeting[i].get_id());
                     jo.put("nombre", greeting[i].getNombre());
                     jo.put("fecha", greeting[i].getFecha());
+                    jo.put("ubicacion", greeting[i].getUbicacion());
+                    jo.put("destino", greeting[i].getDestino());
                     jo.put("descripcion",greeting[i].getDescripcion());
-                    Log.e("verbo",greeting[i].getDescripcion());
+                    Log.e("Imagen",greeting[i].getDescripcion());
                     //  new LoadImage().execute(greeting[i].getDescripcion());
                     ja.put(jo);
 
@@ -123,29 +129,6 @@ public class ListActivity extends ActionBarActivity {
 
 
         }
-
-    }
-   private class HttpRequestTask2 extends AsyncTask<String, Integer, Integer> {
-        @Override
-        protected Integer doInBackground(String... args ) {
-            try {
-                final String url = "http://restsunat.herokuapp.com/notificaciones/"+args[0];
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                restTemplate.delete(url);
-                // URL u = new URL();
-                return null;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
-            }
-            return null;
-
-
-
-
-        }
-
-
 
     }
 

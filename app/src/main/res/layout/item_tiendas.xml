@@ -120,6 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@android:color/white"
+
         >
 
 
@@ -141,10 +142,18 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete"
-            android:onClick="Eliminar"
-            android:id="@+id/buttonDelete" />
+            android:text="Detalle"
+            android:id="@+id/buttonMore" />
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50px"
 
+        android:layout_gravity="center_horizontal"
+
+        >
+
+    </LinearLayout>
 </LinearLayout>

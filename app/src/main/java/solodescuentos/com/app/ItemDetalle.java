@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,13 +23,42 @@ import java.util.ArrayList;
 
 
 public class ItemDetalle extends ActionBarActivity {
-
+String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detalle);
+        Bundle bundle = getIntent().getExtras();
+
+        TextView tvName = (TextView) findViewById(R.id.nombre_content_label);
+        TextView tvHome = (TextView) findViewById(R.id.fecha_content_value);
+        TextView txtUbicacion = (TextView) findViewById(R.id.ubicacion_content_value);
+        TextView txtDestino = (TextView) findViewById(R.id.destino_content_value);
+
+
+
+        ImageView imgView = (ImageView) findViewById(R.id.imageView);
+        id=bundle.getString("Extra_ID");
+        tvName.setText(bundle.getString("Extra_Nombre"));
+        tvHome.setText(bundle.getString("Extra_Fecha"));
+        txtUbicacion.setText(bundle.getString("Extra_Ubicacion"));
+        txtDestino.setText(bundle.getString("Extra_Destino"));
+
+        if (bundle.getString("Extra_Descripcion")==null || bundle.getString("Extra_Descripcion")==""){
+            Picasso.with(getApplicationContext()).load("http://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png").into(imgView);
+        }else{
+            Picasso.with(getApplicationContext()).load(bundle.getString("Extra_Descripcion")).into(imgView);
+        }
+
+
     }
 
+
+
+    public void deleteItem(View view){
+        new HttpRequestTask2().execute(id);
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,67 +82,26 @@ public class ItemDetalle extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class HttpRequestTask extends AsyncTask<Void, Void, Greeting[]> {
 
-
+    private class HttpRequestTask2 extends AsyncTask<String, Integer, Integer> {
         @Override
-        protected Greeting[] doInBackground(Void... params) {
+        protected Integer doInBackground(String... args ) {
             try {
-                final String url = "http://restsunat.herokuapp.com/notificaciones/"+params[0];
+                final String url = "http://restsunat.herokuapp.com/notificaciones/"+args[0];
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Greeting[] greeting = restTemplate.getForObject(url, Greeting[].class);
-
-
-                return greeting;
+                restTemplate.delete(url);
+                // URL u = new URL();
+                return null;
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
             }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Greeting[] greeting) {
-            ArrayList<Greeting> arrayOfUsers = new ArrayList<>();
-// Create the adapter to convert the array to views
-            TiendaAdapter adapter = new TiendaAdapter(getApplicationContext(), arrayOfUsers);
-            // Attach the adapter to a ListView
-            ListView listView = (ListView) findViewById(R.id.lvItems);
-            listView.setAdapter(adapter);
 
 
-            JSONArray ja = new JSONArray();
-
-
-            for (int i=0;i<greeting.length;i++){
-                Log.e("For",""+i);
-
-                try {
-
-                    JSONObject jo = new JSONObject();
-                    jo.put("_id", greeting[i].get_id());
-                    jo.put("nombre", greeting[i].getNombre());
-                    jo.put("fecha", greeting[i].getFecha());
-                    jo.put("descripcion",greeting[i].getDescripcion());
-                    Log.e("verbo",greeting[i].getDescripcion());
-                    //  new LoadImage().execute(greeting[i].getDescripcion());
-                    ja.put(jo);
-
-
-
-                }catch (Exception e){
-                    Log.e("Error: ",e.getMessage());
-                }
-
-            }
-
-
-            JSONArray jsonArray = ja;
-            ArrayList<Greeting> newUsers = Greeting.fromJson(jsonArray);
-            adapter.addAll(newUsers);
 
 
         }
-
     }
-}
+
+   }

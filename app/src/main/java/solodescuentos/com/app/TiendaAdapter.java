@@ -50,19 +50,25 @@ public class TiendaAdapter extends ArrayAdapter<Greeting> {
         TextView tvHome = (TextView) convertView.findViewById(R.id.fecha_content_value);
 
         ImageView imgView = (ImageView) convertView.findViewById(R.id.imageView);
-       Button btn = (Button) convertView.findViewById(R.id.buttonDelete);
-        btn.setText(item.get_id());
+        Button btn = (Button) convertView.findViewById(R.id.buttonMore);
+       // btn.setText(item.get_id());
 
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ItemDetalle.class);
-                intent.putExtra("EXTRA_SESSION_ID", item.getDescripcion());
+                intent.putExtra("Extra_Nombre", item.getNombre());
+                intent.putExtra("Extra_Fecha", item.getFecha());
+                intent.putExtra("Extra_Ubicacion", item.getUbicacion());
+                intent.putExtra("Extra_Destino", item.getDestino());
+                intent.putExtra("Extra_Descripcion", item.getDescripcion());
+                intent.putExtra("Extra_ID", item.get_id());
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                // startActivity(intent);
                 getContext().startActivity(intent);
-                Toast.makeText(getContext(), "id"+item.get_id(), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getContext(), "id"+item.get_id(), Toast.LENGTH_LONG).show();
             }
         });
         // Populate the data into the template view using the data object

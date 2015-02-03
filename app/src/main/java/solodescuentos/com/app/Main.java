@@ -18,9 +18,9 @@ public class Main extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void openTiendaActivity (View view){
+    public void openMaps (View view){
 
-        Intent intent = new Intent(this, DisplayTiendasActivity.class);
+        Intent intent = new Intent(this, maps.class);
         startActivity(intent);
     }
 

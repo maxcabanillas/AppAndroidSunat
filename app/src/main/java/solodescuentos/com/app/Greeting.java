@@ -51,6 +51,9 @@ public class Greeting {
             this.nombre = object.getString("nombre");
             this.fecha = object.getString("fecha");
             this.descripcion = object.getString("descripcion");
+            this.ubicacion = object.getString("ubicacion");
+            this.destino = object.getString("destino");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -54,6 +54,7 @@ public class AddToList extends ActionBarActivity {
 
     public void Message (View view){
         Toast.makeText(getApplicationContext(),"Su Registro ha sido grabado, Puede verificarlo cargando la Lista Nuevamente",Toast.LENGTH_LONG).show();
+        finish();
     }
     public void GrabarPostExcecute (View view){
         TextView txtNombre = (TextView) findViewById(R.id.textViewNombre);
